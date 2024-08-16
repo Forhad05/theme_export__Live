@@ -785,14 +785,14 @@
             class="cart__addOn"
             data-product-id="{{ addon_product.id }}"
           >
-            <div class="cart__addOn-header h3">Add On</div>
+            {% if settings.add_on_title != blank %}
+              <div class="cart__addOn-header h3">{{ settings.add_on_title }}</div>
+            {% endif %}
             <table class="cart__addOn-table cart-items">
               <tbody role="rowgroup cart__addOn-tbody">
                 <tr class="cart-item" role="row">
                   <td class="cart-item__media" role="cell" headers="CartDrawer-ColumnProductImage">
                     {% if addon_product.featured_image %}
-                      {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
-                      <a href="{{ addon_product.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
                       <img
                         class="cart-item__image"
                         src="{{ addon_product.featured_image | image_url: width: 300 }}"
@@ -804,10 +804,8 @@
                     {% endif %}
                   </td>
                   <td class="cart-item__details" role="cell" headers="CartDrawer-ColumnProduct">
-                    <a href="{{ addon_product.url }}" class="cart-item__name h4 break">
-                      {{- addon_product.title | escape | append: ' | ' -}}
-                      <span id="cartAddOnPrice-{{ addon_product.id }}" class="cart__addOn-price">{{ addon_product.price | money }}</span>
-                    </a>
+                    {{- addon_product.title | escape | append: ' | ' -}}
+                    <span id="cartAddOnPrice-{{ addon_product.id }}" class="cart__addOn-price">{{ addon_product.price | money }}</span>
                   </td>
                   <td class="cart-item__meta right" role="cell" headers="CartDrawer-ColumnMeta">
                     <div class="quick-add no-js-hidden">
@@ -839,7 +837,7 @@
                             id="{{ product_form_id }}-submit"
                             type="submit"
                             name="add"
-                            class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
+                            class="quick-add__submit button button--full-width{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
                             aria-haspopup="dialog"
                             aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ addon_product.id }}"
                             aria-live="polite"
