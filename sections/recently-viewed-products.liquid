@@ -201,7 +201,8 @@
             const handles = [];
             data.forEach((item) => {
               const product = item[Object.keys(item)[0]];
-              if(product && product.product && product.product.handle) handles.push(product.product.handle);
+              const activeProductHandle = window.location.href.split('/').pop().split('?').shift();
+              if(product && product.product && product.product.handle && !activeProductHandle.includes(product.product.handle)) handles.push(product.product.handle);
             });
 
             const productCardPromises = handles.map(handle => this.fetchProductCardHTML(handle));
