@@ -108,7 +108,8 @@
           this.productId = this.dataset.productId;
           this.productHandle = this.dataset.productHandle;
           this.recentlyViewedContainer = this.querySelector('#productGrid');
-          this.numberOfProducts = parseInt(this.dataset.showProducts);
+          this.numberOfProductsToShow = parseInt(this.dataset.showProducts);
+          this.numberOfProducts = parseInt(this.dataset.showProducts) + 1;
 
           document.addEventListener('DOMContentLoaded', () => {
             this.renderProduct();
@@ -158,13 +159,6 @@
             Accept: `application/json`
           };
 
-          // const adminApi = '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';
-          // const headers = {
-          //   'X-Shopify-Access-Token': adminApi,
-          //   'Content-Type': 'application/json',
-          //   Accept: `application/json`
-          // };
-
           // Fetch product data using productId
           fetch(product, {headers})
             .then(response => {
@@ -202,7 +196,7 @@
             data.forEach((item) => {
               const product = item[Object.keys(item)[0]];
               const activeProductHandle = window.location.href.split('/').pop().split('?').shift();
-              if(product && product.product && product.product.handle && !activeProductHandle.includes(product.product.handle)) handles.push(product.product.handle);
+              if(product && product.product && product.product.handle && !activeProductHandle.includes(product.product.handle) && handles.length < this.numberOfProductsToShow) handles.push(product.product.handle);
             });
 
             const productCardPromises = handles.map(handle => this.fetchProductCardHTML(handle));
