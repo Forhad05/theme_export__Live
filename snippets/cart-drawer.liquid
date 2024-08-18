@@ -180,7 +180,8 @@
 
 {% liquid
   assign addon_product = settings.product
-  assign addon_product_type = settings.product_type | downcase | strip
+  assign addon_product_type = settings.product.metafields.info.type | downcase | strip
+  assign addon_type = settings.product_type | downcase | strip
   assign duplicate_product = false
   assign match_product_type = false
   for item in cart.items
@@ -189,7 +190,7 @@
       assign duplicate_product = true
       break
     endif
-    if addon_product_type contains line_item_type
+    if addon_type contains line_item_type or addon_product_type contains line_item_type
       assign match_product_type = true
       break
     endif
@@ -780,7 +781,7 @@
           </div>
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
-        {% if settings.product_type != blank %}
+        {% if settings.product_type != blank or addon_product_type != blank %}
           {% if addon_product != blank and match_product_type and duplicate_product == false %}
             <cart-add-on
               class="cart__addOn"
