@@ -61,7 +61,7 @@
                             {{ childlink.title | escape }}
                           </a>
                           {%- if childlink.links != blank -%}
-                            <ul class="list-unstyled" role="list">
+                            <ul class="menu__list-grandchild menu__list-grandchild-{{ forloop.index }} list-unstyled" role="list">
                               {%- for grandchildlink in childlink.links -%}
                                 <li>
                                   <a
