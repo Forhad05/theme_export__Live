@@ -93,6 +93,7 @@
 
 {%- style -%}
   .header {
+    --header-spacing-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
@@ -111,6 +112,7 @@
     .header {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+      --header-spacing-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
   /* mobile search bar */
@@ -153,6 +155,31 @@
   }
 {%- endstyle -%}
 
+{% if section.settings.mega_menu_type != blank and section.settings.menu_type_desktop == 'dropdown' %}
+<style>
+  .header-wrapper {
+    overflow-x: clip;
+  }
+  .mega-menu--type {
+    position: static;
+  }
+  .mega-menu--type .mega-menu__content {
+    position: absolute;
+    top: var(--header-height);
+  }
+  .mega-menu--type .mega-menu__content {
+    position: absolute;
+    top: calc(var(--header-height) - (var(--header-spacing-bottom) + 0.1rem));
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  .mega-menu--type .mega-menu__list {
+    padding: 3rem 0;
+  }
+</style>
+{% endif %}
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
@@ -709,6 +736,12 @@
       "default": "dropdown",
       "label": "t:sections.header.settings.menu_type_desktop.label",
       "info": "t:sections.header.settings.menu_type_desktop.info"
+    },
+    {
+      "type": "text",
+      "id": "mega_menu_type",
+      "label": "Mega menu",
+      "info": "Type name of any top level menu to change it into a 'Mega menu'. Only available with Desktop menu type 'Dropdown'"
     },
     {
       "type": "select",
