@@ -122,6 +122,7 @@
     "enable_cart_header_checkout_button": true,
     "product": "the-complete-snowboard",
     "product_type": "",
+    "product_category_type": "Snow board",
     "drawer_cart_toggle": "",
     "shippingbar": false,
     "free_shipping_threshold_amount": 500,
