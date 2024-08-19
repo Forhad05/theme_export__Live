@@ -136,6 +136,21 @@
       max-height: calc(100vh - (var(--header-height) + 4.5rem + var(--inputs-border-width) * 2)) !important;
     }
   }
+  /* header menu */
+  header-menu > details > summary {
+    position: relative;
+  }
+  header-menu summary > .link--overlay:empty {
+    display: block;
+  }
+  header-menu summary > .link--overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
 {%- endstyle -%}
 
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -443,6 +458,23 @@
   {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
 {%- endif -%}
 
+{% if section.settings.nav_open_hover %}
+  <script>
+    let items = document.querySelector(".header__inline-menu").querySelectorAll("details");
+
+    items.forEach(item => {
+      item.addEventListener("mouseover", () => {
+        item.setAttribute("open", true);
+        item.querySelector("ul").addEventListener("mouseleave", () => {
+          item.removeAttribute("open");
+        });
+        item.addEventListener("mouseleave", () => {
+          item.removeAttribute("open");
+        });
+      });
+    });
+  </script>
+{% endif %}
 <script>
   var mobileMedia = window.matchMedia("(max-width: 989px)");
   mobileMedia.addEventListener('change', () => {
@@ -736,6 +768,12 @@
       "type": "checkbox",
       "id": "search_slide_mobile",
       "label": "Search Slider on Mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "nav_open_hover",
+      "label": "Nav Open on Hover",
       "default": true
     },
     {
