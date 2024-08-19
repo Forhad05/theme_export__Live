@@ -1498,6 +1498,11 @@
         "label": "Add-On Product type"
       },
       {
+        "type": "text",
+        "id": "product_category_type",
+        "label": "Add-On Product Metafield Category"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cart.settings.cart_drawer.header"
       },
