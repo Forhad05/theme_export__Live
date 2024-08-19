@@ -176,7 +176,13 @@
     z-index: 1;
   }
   .mega-menu--type .mega-menu__list {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     padding: 3rem 0;
+  }
+  .mega-menu--type .mega-menu__list a[href]:not(:hover) {
+    text-decoration: none;
   }
 </style>
 {% endif %}
