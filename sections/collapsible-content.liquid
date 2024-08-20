@@ -57,6 +57,15 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 }
+/* collapsible sub heading */
+.collapsible-content .accordion--subtitle {
+  line-height: 1;
+  padding: 1.5rem 0;
+  border-top: none;
+}
+.collapsible-content .filter__enabled .accordion--subtitle {
+  display: none;
+}
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
@@ -87,7 +96,7 @@
           {% assign filters_settings = section.settings.filters %}
           {% assign filters_to_lowercase = filters_settings | downcase %}
           {% assign filters = filters_to_lowercase | split: " | " %}
-          
+
           <nav>
             <ul class="navigation-list filter-navigation">
               {% for filter in filters %}
@@ -100,9 +109,9 @@
         </div>
         <!-- Collapsible filter navigation ends -->
         {% endif %}
-        
+
         <div class="grid grid--1-col grid--2-col-tablet collapsible-content__grid{% if section.settings.desktop_layout == 'image_second' %} collapsible-content__grid--reverse{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          
+
           {%- if section.settings.image != blank -%}
             <div class="grid__item collapsible-content__grid-item">
               <div
@@ -138,6 +147,16 @@
             {%- for block in section.blocks -%}
               {% assign data_filter_cms = block.settings.filter %}
               {% assign data_filter = data_filter_cms | replace: ' ', '-' | downcase %}
+              {% if block.settings.heading != blank and block.settings.enable_subheading %}
+                <div
+                  {% if data_filter_cms != blank %}
+                    data-filter="{{ data_filter }}"
+                  {% endif %}
+                  class="accordion accordion--subtitle"
+                >
+                  <h3 class="accordion__title inline-richtext h4">{{ block.settings.heading }}</h3>
+                </div>
+              {% endif %}
               <div
                 {% if data_filter_cms != blank %}
                   data-filter="{{ data_filter }}"
@@ -157,7 +176,7 @@
                       {{ block.settings.heading | default: block.settings.page.title }}
                     </h3>
                     <div class="trigger-icon">
-                      {% unless block.settings.replace_arrow %}                      
+                      {% unless block.settings.replace_arrow %}
                         {% render 'icon-caret' %}
                         {% else %}
                          {% render 'icon-plus' %}
@@ -189,6 +208,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   // Get all buttons and accordions
+  const accordionContainer = document.querySelector(".collapsible-content__grid");
   const buttons = document.querySelectorAll(".filter-navigation .button--secondary");
   const accordions = document.querySelectorAll('.accordion');
 
@@ -205,6 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // If the button was not already selected, add the "selected" class
     if (!isSelected) {
       button.classList.add("selected");
+      accordionContainer.classList.add("filter__enabled");
     }
 
     // Get the data-filter value from the clicked button
@@ -230,6 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (noButtonSelected) {
       accordions.forEach(function (accordion) {
         accordion.classList.remove("hidden");
+        accordionContainer.classList.remove("filter__enabled");
       });
     }
   }
@@ -430,6 +452,12 @@ document.addEventListener("DOMContentLoaded", function () {
       "type": "collapsible_row",
       "name": "t:sections.collapsible_content.blocks.collapsible_row.name",
       "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_subheading",
+          "label": "Show Sub heading",
+          "default": false
+        },
         {
           "type": "text",
           "id": "heading",
