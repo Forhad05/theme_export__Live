@@ -186,7 +186,7 @@
   assign match_product_type = false
   for item in cart.items
     assign line_item_type = item.product.type | downcase | strip
-    if item.product.metafields.info.type != blank
+    if item.product.metafields.info.type != blank and addon_product_type != blank
       assign line_item_type = item.product.metafields.info.type | downcase | strip
     endif
     if item.product == addon_product
@@ -784,7 +784,7 @@
           </div>
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
-        {% if settings.product_type != blank or addon_product_type != blank %}
+        {% if addon_type != blank or addon_product_type != blank %}
           {% if addon_product != blank and match_product_type and duplicate_product == false %}
             <cart-add-on
               class="cart__addOn"
