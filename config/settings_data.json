@@ -121,7 +121,7 @@
     "show_cart_note": true,
     "enable_cart_header_checkout_button": true,
     "product": "the-complete-snowboard",
-    "product_type": "Bags",
+    "product_type": "",
     "product_category_type": "",
     "drawer_cart_toggle": "",
     "shippingbar": false,
