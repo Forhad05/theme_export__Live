@@ -186,7 +186,7 @@
   assign match_product_type = false
   for item in cart.items
     assign line_item_type = item.product.type | downcase | strip
-    if item.product.metafields.info.type != blank and addon_product_type != blank and addon_product_type contains line_item_type
+    if item.product.metafields.info.type != blank and addon_product_type != blank and addon_type != line_item_type
       assign line_item_type = item.product.metafields.info.type | downcase | strip
     endif
     if item.product == addon_product
