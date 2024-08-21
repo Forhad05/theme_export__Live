@@ -147,14 +147,14 @@
             {%- for block in section.blocks -%}
               {% assign data_filter_cms = block.settings.filter %}
               {% assign data_filter = data_filter_cms | replace: ' ', '-' | downcase %}
-              {% if block.settings.heading != blank and block.settings.enable_subheading %}
+              {% if block.settings.filter != blank and block.settings.enable_subheading %}
                 <div
                   {% if data_filter_cms != blank %}
                     data-filter="{{ data_filter }}"
                   {% endif %}
-                  class="accordion accordion--subtitle"
+                  class="accordion accordion__title--{{ block.settings.filter }} accordion--subtitle"
                 >
-                  <h3 class="accordion__title inline-richtext h4">{{ block.settings.heading }}</h3>
+                  <h3 class="accordion__title inline-richtext h4">{{ block.settings.filter }}</h3>
                 </div>
               {% endif %}
               <div
