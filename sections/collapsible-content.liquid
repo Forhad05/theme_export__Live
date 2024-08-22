@@ -66,6 +66,9 @@
 .collapsible-content .filter__enabled .accordion--subtitle {
   display: none;
 }
+.collapsible-content .accordion--subtitle .accordion__title {
+  font-weight: var(--font-body-weight-bold);
+}
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
@@ -152,7 +155,7 @@
                   {% if data_filter_cms != blank %}
                     data-filter="{{ data_filter }}"
                   {% endif %}
-                  class="accordion accordion__title--{{ block.settings.filter }} accordion--subtitle"
+                  class="accordion accordion__title--{{ block.settings.filter | handleize }} accordion--subtitle"
                 >
                   <h3 class="accordion__title inline-richtext h4">{{ block.settings.filter }}</h3>
                 </div>
