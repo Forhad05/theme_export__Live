@@ -128,10 +128,10 @@
       transform: translateY(-100%);
       z-index: -1;
     }
-    .scrolled-past-header .search-bar--mobile {
+    .show-search-slider .search-bar--mobile {
       transform: translateY(0.1rem);
     }
-    .scrolled-past-header .header__search {
+    .show-search-slider .header__search {
       display: none;
     }
     .search-bar--mobile predictive-search[open] .predictive-search {
@@ -444,6 +444,10 @@
   </header>
   {% if section.settings.search_slide_mobile %}
     <div class="search-bar--mobile large-up-hide">
+      <search-slider
+        class="search-slider"
+        data-slide-position="{{ section.settings.search_slider_position }}"
+      >
       {%- if settings.predictive_search_enabled -%}
         <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
       {%- else -%}
@@ -500,6 +504,7 @@
       {%- else -%}
         </search-form>
       {%- endif -%}
+      </search-slider>
     </div>
   {% endif %}
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
@@ -508,6 +513,58 @@
   {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
 {%- endif -%}
 
+{% if section.settings.search_slide_mobile %}
+  <script>
+    if(!customElements.get('search-slider')) {
+      customElements.define(
+        'search-slider',
+        class SearchSlider extends HTMLElement {
+          constructor() {
+            super();
+            this.lastScrollPosition = 0;
+            this.scrolledPastThreshold = false;
+            this.sectionHeader = this.closest('.section-header');
+            this.slidePosition = parseInt(this.dataset.slidePosition);
+
+            this.toggleSlidingSearch();
+          }
+
+          calculatePercentageOfViewportHeight(percentage) {
+            const vh = window.innerHeight;
+            const pixels = (vh * percentage) / 100;
+            return pixels;
+          }
+
+          scrollHandle() {
+            const threshold = this.calculatePercentageOfViewportHeight(this.slidePosition);
+            const scrollPosition = window.scrollY;
+            const isScrollingDown = scrollPosition > this.lastScrollPosition;
+
+            if (isScrollingDown && scrollPosition > threshold && !this.scrolledPastThreshold) {
+              if(!this.sectionHeader.classList.contains('show-search-slider'))
+                this.sectionHeader.classList.add('show-search-slider');
+              this.scrolledPastThreshold = true;
+            } else if (!isScrollingDown && scrollPosition <= threshold && this.scrolledPastThreshold) {
+              if(this.sectionHeader.classList.contains('show-search-slider'))
+                this.sectionHeader.classList.remove('show-search-slider');
+              this.scrolledPastThreshold = false;
+            }
+
+            this.lastScrollPosition = scrollPosition;
+          }
+
+          toggleSlidingSearch() {
+            const matchMobileMedia = window.matchMedia('(max-width: 989px)');
+            matchMobileMedia.matches && window.addEventListener('scroll', this.scrollHandle.bind(this));
+            matchMobileMedia.addEventListener('change', () => {
+              matchMobileMedia.matches && window.addEventListener('scroll', this.scrollHandle.bind(this));
+            });
+          }
+        }
+      );
+    }
+  </script>
+{% endif %}
 {% if section.settings.nav_open_hover %}
   <script>
     let items = document.querySelector(".header__inline-menu").querySelectorAll("details");
@@ -830,6 +887,17 @@
       "id": "search_slide_mobile",
       "label": "Search Slider on Mobile",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "search_slider_position",
+      "label": "Search Slider Display % of Screen",
+      "default": 15,
+      "unit": "%",
+      "step": 1,
+      "max": 99,
+      "min": 1,
+      "info": "This input takes the View Height of a device to define the % from px"
     },
     {
       "type": "checkbox",
