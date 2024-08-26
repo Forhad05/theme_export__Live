@@ -18,7 +18,7 @@
       padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
     }
-    
+
     @media screen and (min-width: 750px) {
       .section-{{ section.id }}-padding {
         padding-top: {{ section.settings.padding_top }}px;
@@ -80,7 +80,7 @@
           {%- case block.type -%}
             {%- when '@app' -%}
               {% render block %}
-           
+
             {%- when 'text' -%}
               {% assign msrp_metafield_value = product.metafields.retail.msrp %}
               {% if block.settings.text contains 'MSRP:' and msrp_metafield_value %}
@@ -151,7 +151,7 @@
                   price_class: 'price--large'
                 -%}
               </div>
-              
+
               {%- if product.quantity_price_breaks_configured? -%}
                 <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                   <span>{{ 'products.product.volume_pricing.note' | t }}</span>
@@ -232,7 +232,15 @@
                 <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                   {{ product.description }}
                 </div>
+              {% else %}
+              <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+                {{ product.description }}
+              </div>
               {%- endif -%}
+              {% else %}
+              <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+                {{ product.description }}
+              </div>
               {%- endif -%}
             {%- when 'sku' -%}
               <p
@@ -245,7 +253,7 @@
               </p>
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
-            
+
               {%- assign sold_out = true -%}
               {%- for variant in product.variants -%}
                 {%- if variant.available -%}
@@ -255,7 +263,7 @@
               {%- endfor -%}
 
             {%- assign collapsible_tab_counter = 0 -%}
-            
+
             {%- when 'collapsible_tab' -%}
               {% if block.settings.remove_collapsible_tigger_desktop %}
               <style>
@@ -283,7 +291,7 @@
                       </h2>
                     </div>
                     <div class="trigger-icon">
-                    {% unless block.settings.enable_collaps_icon %}                      
+                    {% unless block.settings.enable_collaps_icon %}
                     {% render 'icon-caret' %}
                     {% else %}
                      {% render 'icon-plus' %}
@@ -2264,7 +2272,7 @@
           "default": "<p>Enter footer text for popup</p>",
           "label": "Popup footer text"
         }
-        
+
       ]
     }
   ],
@@ -2286,7 +2294,7 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "background-1"
-    },    
+    },
     {
       "type": "header",
       "content": "t:sections.main-product.settings.header.content",
