@@ -49,7 +49,7 @@
                       role="list"
                     >
                       {%- for childlink in link.links -%}
-                        <li>
+                        <li class="submenu-{{ childlink.title | handleize }}">
                           <a
                             id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
                             href="{{ childlink.url }}"
@@ -91,7 +91,7 @@
                   tabindex="-1"
                 >
                   {%- for childlink in link.links -%}
-                    <li>
+                    <li class="submenu-{{ childlink.title | handleize }}">
                       {%- if childlink.links == blank -%}
                         <a
                           id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"

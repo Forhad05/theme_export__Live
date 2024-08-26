@@ -196,6 +196,11 @@
   .mega-menu--type .mega-menu__list a[href]:not(:hover) {
     text-decoration: none;
   }
+  {% if section.settings.nav_open_hover %}
+  details:not(.mega-menu--type) *[class^="submenu-all"] {
+    display: none;
+  }
+  {% endif %}
 </style>
 {% endif %}
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
