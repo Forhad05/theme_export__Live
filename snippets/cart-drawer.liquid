@@ -180,6 +180,7 @@
 
 {% liquid
   assign addon_product = settings.product
+  assign addon_product_vendors = settings.product_vendor_type | downcase | strip | split: ','
   assign addon_product_type = settings.product_category_type | downcase | strip
   assign addon_type = settings.product_type | downcase | strip
   assign duplicate_product = false
@@ -189,11 +190,18 @@
     if item.product.metafields.info.type != blank and addon_product_type != blank and settings.product_type != line_item_type
       assign line_item_type = item.product.metafields.info.type | downcase | strip
     endif
+    if addon_product_vendors != blank
+      for addon_vendor in addon_product_vendors
+        if addon_vendor != blank and item.product.vendor != blank
+          assign line_item_type = item.product.vendor | downcase | strip
+        endif
+      endfor
+    endif
     if item.product == addon_product
       assign duplicate_product = true
       break
     endif
-    if addon_type contains line_item_type or addon_product_type contains line_item_type
+    if addon_type contains line_item_type or addon_product_type contains line_item_type or addon_product_vendors
       assign match_product_type = true
       break
     endif
@@ -784,7 +792,7 @@
           </div>
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
-        {% if addon_type != blank or addon_product_type != blank %}
+        {% if addon_type != blank or addon_product_type != blank or addon_product_vendors != blank %}
           {% if addon_product != blank and match_product_type and duplicate_product == false %}
             <cart-add-on
               class="cart__addOn"
