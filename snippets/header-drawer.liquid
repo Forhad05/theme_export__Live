@@ -7,7 +7,7 @@
 
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   {% if section.settings.mobile_search_left %}
-  <div class="header__icon menuhumb-search{% if section.settings.desktop_search_right %} desktop_search_on_right{% endif %}">  
+  <div class="header__icon menuhumb-search{% if section.settings.desktop_search_right %} desktop_search_on_right{% endif %}">
   {% endif %}
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
@@ -102,7 +102,24 @@
                                         role="list"
                                         tabindex="-1"
                                       >
+                                        {% for grandchildlink in childlink.links %}
+                                          {% if grandchildlink.title contains 'All' %}
+                                            <li>
+                                              <a
+                                                id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                                href="{{ grandchildlink.url }}"
+                                                class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                                {% if grandchildlink.current %}
+                                                  aria-current="page"
+                                                {% endif %}
+                                              >
+                                                {{ grandchildlink.title | escape }}
+                                              </a>
+                                            </li>
+                                          {% endif %}
+                                        {% endfor %}
                                         {%- for grandchildlink in childlink.links -%}
+                                          {% unless grandchildlink.title contains 'All' %}
                                           <li>
                                             <a
                                               id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
@@ -115,6 +132,7 @@
                                               {{ grandchildlink.title | escape }}
                                             </a>
                                           </li>
+                                          {% endunless %}
                                         {%- endfor -%}
                                       </ul>
                                     </div>
@@ -329,7 +347,7 @@
   </details>
 {% if section.settings.mobile_search_left %}
   <div class="search-inside">
-    {% render 'header-search', input_id: 'Search-In-Modal-1' %} 
+    {% render 'header-search', input_id: 'Search-In-Modal-1' %}
   </div>
 </div>
 {% endif %}
