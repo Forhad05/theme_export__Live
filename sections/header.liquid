@@ -529,7 +529,7 @@
           }
 
           calculatePercentageOfViewportHeight(percentage) {
-            const vh = window.innerHeight;
+            const vh = document.querySelector('body').offsetHeight;
             const pixels = (vh * percentage) / 100;
             return pixels;
           }
