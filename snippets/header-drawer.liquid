@@ -27,6 +27,10 @@
               {%- for link in section.settings.menu.links -%}
                 <li>
                   {%- if link.links != blank -%}
+                    {% liquid
+                      assign link_title = link.title | downcase | strip
+                      assign mega_menu_type = section.settings.mega_menu_type | downcase | strip
+                    %}
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                       <summary
                         id="HeaderDrawer-{{ link.handle }}"
@@ -54,6 +58,52 @@
                           {% endif %}
                             {{ link.title | escape }}
                           </button>
+                          {% if link_title == mega_menu_type %}
+                            {%- for childlink in link.links -%}
+                              {% assign childlink_title = childlink.title %}
+                              {% if childlink.links != blank and childlink_title contains 'Designer' %}
+                                <ul
+                                  class="menu-drawer__menu list-menu"
+                                  role="list"
+                                  tabindex="-1"
+                                >
+                                  {%- for grandchildlink in childlink.links -%}
+                                    {% if grandchildlink.title contains 'All' %}
+                                      <li>
+                                        <a
+                                          id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                          href="{{ grandchildlink.url }}"
+                                          class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                          {% if grandchildlink.current %}
+                                            aria-current="page"
+                                          {% endif %}
+                                        >
+                                          {{ grandchildlink.title | escape }}
+                                        </a>
+                                      </li>
+                                    {% endif %}
+                                  {%- endfor -%}
+                                  {%- for grandchildlink in childlink.links -%}
+                                    {% unless grandchildlink.title contains 'All' %}
+                                      <li>
+                                        <a
+                                          id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                          href="{{ grandchildlink.url }}"
+                                          class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                          {% if grandchildlink.current %}
+                                            aria-current="page"
+                                          {% endif %}
+                                        >
+                                          {{ grandchildlink.title | escape }}
+                                        </a>
+                                      </li>
+                                    {% endunless %}
+                                  {%- endfor -%}
+                                </ul>
+                              {% endif %}
+                            {%- endfor -%}
+                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1"></ul>
+                          {% else %}
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                             {%- for childlink in link.links -%}
                               <li>
@@ -102,24 +152,7 @@
                                         role="list"
                                         tabindex="-1"
                                       >
-                                        {% for grandchildlink in childlink.links %}
-                                          {% if grandchildlink.title contains 'All' %}
-                                            <li>
-                                              <a
-                                                id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                                href="{{ grandchildlink.url }}"
-                                                class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
-                                                {% if grandchildlink.current %}
-                                                  aria-current="page"
-                                                {% endif %}
-                                              >
-                                                {{ grandchildlink.title | escape }}
-                                              </a>
-                                            </li>
-                                          {% endif %}
-                                        {% endfor %}
                                         {%- for grandchildlink in childlink.links -%}
-                                          {% unless grandchildlink.title contains 'All' %}
                                           <li>
                                             <a
                                               id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
@@ -132,7 +165,6 @@
                                               {{ grandchildlink.title | escape }}
                                             </a>
                                           </li>
-                                          {% endunless %}
                                         {%- endfor -%}
                                       </ul>
                                     </div>
@@ -141,6 +173,7 @@
                               </li>
                             {%- endfor -%}
                           </ul>
+                          {% endif %}
                         </div>
                       </div>
                     </details>
