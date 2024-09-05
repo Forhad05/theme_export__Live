@@ -104,9 +104,9 @@
                             {%- endfor -%}
                           {% else %}
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
-                            {%- for childlink in link.links -%}
-                              <li>
-                                {%- if childlink.links == blank -%}
+                            {% if link.levels == 1 %}
+                              {% for childlink in link.links %}
+                                {% if childlink.title contains 'All' %}
                                   <a
                                     id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
                                     href="{{ childlink.url }}"
@@ -117,6 +117,24 @@
                                   >
                                     {{ childlink.title | escape }}
                                   </a>
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                            {%- for childlink in link.links -%}
+                              <li>
+                                {%- if childlink.links == blank -%}
+                                  {% unless childlink.title contains 'All' %}
+                                  <a
+                                    id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                    href="{{ childlink.url }}"
+                                    class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                    {% if childlink.current %}
+                                      aria-current="page"
+                                    {% endif %}
+                                  >
+                                    {{ childlink.title | escape }}
+                                  </a>
+                                  {% endunless %}
                                 {%- else -%}
                                   <details id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
                                     <summary
