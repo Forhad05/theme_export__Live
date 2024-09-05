@@ -153,6 +153,23 @@
                                         tabindex="-1"
                                       >
                                         {%- for grandchildlink in childlink.links -%}
+                                          {% if grandchildlink.title contains 'All' %}
+                                            <li>
+                                              <a
+                                                id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                                href="{{ grandchildlink.url }}"
+                                                class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                                {% if grandchildlink.current %}
+                                                  aria-current="page"
+                                                {% endif %}
+                                              >
+                                                {{ grandchildlink.title | escape }}
+                                              </a>
+                                            </li>
+                                          {% endif %}
+                                        {%- endfor -%}
+                                        {%- for grandchildlink in childlink.links -%}
+                                        {% unless grandchildlink.title contains 'All' %}
                                           <li>
                                             <a
                                               id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
@@ -165,6 +182,7 @@
                                               {{ grandchildlink.title | escape }}
                                             </a>
                                           </li>
+                                        {% endunless %}
                                         {%- endfor -%}
                                       </ul>
                                     </div>
