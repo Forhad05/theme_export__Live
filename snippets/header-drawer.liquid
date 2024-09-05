@@ -83,6 +83,25 @@
                                       </li>
                                     {% endif %}
                                   {%- endfor -%}
+                                  {% for childlink in link.links %}
+                                    {% assign childlink_title = childlink.title %}
+                                    {% if childlink.links != blank and childlink_title contains 'Popular' %}
+                                      {% for grandchildlink in childlink.links %}
+                                        <li>
+                                          <a
+                                            id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                            href="{{ grandchildlink.url }}"
+                                            class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                            {% if grandchildlink.current %}
+                                              aria-current="page"
+                                            {% endif %}
+                                          >
+                                            {{ grandchildlink.title | escape }}
+                                          </a>
+                                        </li>
+                                      {% endfor %}
+                                    {% endif %}
+                                  {% endfor %}
                                   {%- for grandchildlink in childlink.links -%}
                                     {% unless grandchildlink.title contains 'All' %}
                                       <li>
