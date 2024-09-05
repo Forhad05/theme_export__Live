@@ -58,51 +58,6 @@
                           {% endif %}
                             {{ link.title | escape }}
                           </button>
-                          {% if link_title == mega_menu_type %}
-                            {%- for childlink in link.links -%}
-                              {% assign childlink_title = childlink.title %}
-                              {% if childlink.links != blank and childlink_title contains 'Designer' %}
-                                <ul
-                                  class="menu-drawer__menu list-menu"
-                                  role="list"
-                                  tabindex="-1"
-                                >
-                                  {%- for grandchildlink in childlink.links -%}
-                                    {% if grandchildlink.title contains 'All' %}
-                                      <li>
-                                        <a
-                                          id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                          href="{{ grandchildlink.url }}"
-                                          class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
-                                          {% if grandchildlink.current %}
-                                            aria-current="page"
-                                          {% endif %}
-                                        >
-                                          {{ grandchildlink.title | escape }}
-                                        </a>
-                                      </li>
-                                    {% endif %}
-                                  {%- endfor -%}
-                                  {%- for grandchildlink in childlink.links -%}
-                                    {% unless grandchildlink.title contains 'All' %}
-                                      <li>
-                                        <a
-                                          id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                          href="{{ grandchildlink.url }}"
-                                          class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
-                                          {% if grandchildlink.current %}
-                                            aria-current="page"
-                                          {% endif %}
-                                        >
-                                          {{ grandchildlink.title | escape }}
-                                        </a>
-                                      </li>
-                                    {% endunless %}
-                                  {%- endfor -%}
-                                </ul>
-                              {% endif %}
-                            {%- endfor -%}
-                          {% else %}
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                             {% if link.levels == 1 %}
                               {% for childlink in link.links %}
@@ -208,7 +163,6 @@
                               </li>
                             {%- endfor -%}
                           </ul>
-                          {% endif %}
                         </div>
                       </div>
                     </details>
