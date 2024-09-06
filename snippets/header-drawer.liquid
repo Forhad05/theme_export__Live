@@ -63,13 +63,13 @@
                               {% assign childlink_title = childlink.title %}
                               {% if childlink.links != blank and childlink_title contains 'Designer' %}
                                 <ul
-                                  class="menu-drawer__menu list-menu js-drawer__menu-sort"
+                                  class="menu-drawer__menu list-menu"
                                   role="list"
                                   tabindex="-1"
                                 >
                                   {%- for grandchildlink in childlink.links -%}
                                     {% if grandchildlink.title contains 'All' %}
-                                      <li data-title="{{ grandchildlink.title }}">
+                                      <li>
                                         <a
                                           id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                           href="{{ grandchildlink.url }}"
@@ -87,7 +87,7 @@
                                     {% assign childlink_title = childlink.title %}
                                     {% if childlink.links != blank and childlink_title contains 'Popular' %}
                                       {% for grandchildlink in childlink.links %}
-                                        <li data-title="{{ grandchildlink.title }}">
+                                        <li>
                                           <a
                                             id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                             href="{{ grandchildlink.url }}"
@@ -104,7 +104,7 @@
                                   {% endfor %}
                                   {%- for grandchildlink in childlink.links -%}
                                     {% unless grandchildlink.title contains 'All' %}
-                                      <li data-title="{{ grandchildlink.title }}">
+                                      <li>
                                         <a
                                           id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                           href="{{ grandchildlink.url }}"
@@ -439,14 +439,3 @@
 </div>
 {% endif %}
 </header-drawer>
-
-<script>
-  function menuListSort() {
-    const sortList = document.querySelector('.js-drawer__menu-sort');
-    const sortItems = Array.from(document.querySelectorAll('.js-drawer__menu-sort > li'));
-    if(!sortList || sortItems.length === 0) return;
-    sortItems.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
-    sortItems.forEach(item => sortList.appendChild(item));
-  }
-  menuListSort();
-</script>
