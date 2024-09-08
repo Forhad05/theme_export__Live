@@ -1,100 +1,63 @@
 {
   "sections": {
-    "slideshow_iRacGB": {
-      "type": "slideshow",
+    "image_banner_Q4BQmD": {
+      "type": "image-banner",
       "blocks": {
-        "slide_FXfiQ6": {
-          "type": "slide",
+        "heading_MfPiNn": {
+          "type": "heading",
           "settings": {
-            "desktop_image": "shopify:\/\/shop_images\/Retyche-Shop-Newest-Arrivals-Online.jpg",
-            "tablet_image": "shopify:\/\/shop_images\/Retyche-Shop-Newest-Arrivals_Online.jpg",
-            "mobile_image": "shopify:\/\/shop_images\/Retyche-Shop-Newest_Arrivals_Online.jpg",
-            "heading": "Accessorize for the vacation <em>you deserve<\/em>",
+            "heading": "Image banner",
             "heading_size": "h1",
-            "subheading": "",
-            "button_label": "SHOP NEW ARRIVALS",
-            "link": "shopify:\/\/collections\/new",
-            "button_style": "solid",
-            "mobile_button_style": "link",
-            "header_font": "Didot",
-            "clickable_image": true,
-            "button_style_secondary": false,
-            "box_align": "middle-right",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 20,
-            "color_scheme": "background-1",
-            "text_alignment_mobile": "center"
+            "heading_alignment": "center"
           }
         },
-        "slide_gPTeLy": {
-          "type": "slide",
+        "text_64grKk": {
+          "type": "text",
           "settings": {
-            "desktop_image": "shopify:\/\/shop_images\/Retyche-Shop-Designer-Bags-Online.jpg",
-            "tablet_image": "shopify:\/\/shop_images\/Retyche-Shop-Designer-Bags_Online.jpg",
-            "mobile_image": "shopify:\/\/shop_images\/Retyche-Shop-Designer_Bags_Online.jpg",
-            "heading": "Sun's out,<em> style up!<\/em>",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "SHOP DESIGNER BAGS",
-            "link": "shopify:\/\/collections\/bags",
-            "button_style": "solid",
-            "mobile_button_style": "link",
-            "header_font": "Didot",
-            "clickable_image": true,
-            "button_style_secondary": false,
-            "box_align": "middle-right",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 20,
-            "color_scheme": "background-1",
-            "text_alignment_mobile": "center"
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
           }
         },
-        "slide_Bf933i": {
-          "type": "slide",
-          "disabled": true,
+        "buttons_DRVnqh": {
+          "type": "buttons",
           "settings": {
-            "desktop_image": "shopify:\/\/shop_images\/Retyche-Visit-Carrefour-Laval-Popup.jpg",
-            "tablet_image": "shopify:\/\/shop_images\/Retyche-Visit-Carrefour-Laval_Popup.jpg",
-            "mobile_image": "shopify:\/\/shop_images\/Retyche-Visit-Carrefour_Laval_Popup.jpg",
-            "heading": "New Carrefour Laval Pop-Up",
-            "heading_size": "h1",
-            "subheading": "<em>Until August 31st<\/em>",
-            "button_label": "COME VISIT US",
-            "link": "shopify:\/\/pages\/contact-visit",
-            "button_style": "solid",
-            "mobile_button_style": "link",
-            "header_font": "Didot",
-            "clickable_image": true,
-            "button_style_secondary": false,
-            "box_align": "middle-center",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 20,
-            "color_scheme": "",
-            "text_alignment_mobile": "center"
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false,
+            "hide_button": false,
+            "button_below_image": false,
+            "view_all_style": "solid"
           }
         }
       },
       "block_order": [
-        "slide_FXfiQ6",
-        "slide_gPTeLy",
-        "slide_Bf933i"
+        "heading_MfPiNn",
+        "text_64grKk",
+        "buttons_DRVnqh"
       ],
       "settings": {
-        "layout": "full_bleed",
-        "slide_height_desktop": "large",
-        "slide_height_mobile": "small",
-        "slider_visual": "dots",
-        "auto_rotate": true,
-        "remove_paly_pause_icon": true,
-        "change_slides_speed": 7,
+        "image": "shopify:\/\/shop_images\/theme_cover_image_desktop.jpg",
+        "image_tablet": "shopify:\/\/shop_images\/theme_cover_image_tablet.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/theme_cover_image_mobile.jpg",
+        "image_overlay_opacity": 0,
+        "banner_link": "",
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "heading_on_top": false,
+        "full_width": true,
         "image_behavior": "none",
-        "show_text_below": true,
-        "accessibility_info": "Retyche",
+        "image_height_mobile": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false,
         "padding_top": 0,
-        "padding_bottom": 8
+        "padding_bottom": 0
       }
     },
     "eafc3bfa-e25c-42df-8ce4-9ce1e8bff93e": {
@@ -239,9 +202,6 @@
         "3f448e01-8dda-43e5-b7d0-1cc46b331abc"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/Retyche-Sell-With-Us.jpg",
-        "image_tablet": "shopify:\/\/shop_images\/Retyche-Sell-With_Us.jpg",
-        "image_mobile": "shopify:\/\/shop_images\/Retyche-Sell_With_Us.jpg",
         "image_overlay_opacity": 0,
         "banner_link": "",
         "image_height": "medium",
@@ -306,9 +266,6 @@
         "buttons_LAQ7mF"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/authenticity_image_home_page.jpg",
-        "image_tablet": "shopify:\/\/shop_images\/authenticity_home_banner_tablet.jpg",
-        "image_mobile": "shopify:\/\/shop_images\/authenticity_home_banner_mobile.jpg",
         "image_overlay_opacity": 0,
         "banner_link": "",
         "image_height": "medium",
@@ -367,7 +324,6 @@
         "a873e07c-9e7d-40fd-8ebe-230fe5b1a525"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/Visit-Retyche.jpg",
         "image_overlay_opacity": 0,
         "banner_link": "",
         "image_height": "medium",
@@ -392,7 +348,6 @@
         "column_Mwhtec": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/certified_ribbon.svg",
             "title": "AUTHENTICITY GUARANTEED",
             "heading_size": "h5",
             "text": "",
@@ -404,7 +359,6 @@
         "column_UEHxMC": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/rating-star-give.svg",
             "title": "CONDITION RATINGS",
             "heading_size": "h5",
             "text": "",
@@ -416,7 +370,6 @@
         "column_3ybH9E": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/currency-dollar-circle.svg",
             "title": "PAYMENT PLANS AVAILABLE",
             "heading_size": "h5",
             "text": "",
@@ -428,7 +381,6 @@
         "column_eCKc7L": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/shipment-package.svg",
             "title": "RETURNS & EXCHANGES",
             "heading_size": "h5",
             "text": "",
@@ -582,7 +534,7 @@
     }
   },
   "order": [
-    "slideshow_iRacGB",
+    "image_banner_Q4BQmD",
     "eafc3bfa-e25c-42df-8ce4-9ce1e8bff93e",
     "2bbe24f1-0740-4d21-ba56-17de72279f05",
     "rich_text_zxiR4N",
