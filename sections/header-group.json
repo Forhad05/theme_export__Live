@@ -71,7 +71,7 @@
         "mobile_account_enabled": true,
         "enable_collaps_icon": true,
         "search_slide_mobile": true,
-        "search_slider_position": 70,
+        "search_slider_position": 30,
         "nav_open_hover": true,
         "color_scheme": "background-1",
         "menu_color_scheme": "",
