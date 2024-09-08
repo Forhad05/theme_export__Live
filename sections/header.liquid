@@ -126,10 +126,21 @@
       transform-origin: top;
       transition: all var(--duration-long) ease;
       transform: translateY(-100%);
+      -webkit-transform: translateY(-100%);
+      -moz-transform: translateY(-100%);
+      -ms-transform: translateY(-100%);
+      -o-transform: translateY(-100%);
       z-index: -1;
+    }
+    .show-search-slider .header-wrapper {
+      overflow-x: visible;
     }
     .show-search-slider .search-bar--mobile {
       transform: translateY(0.1rem);
+      -webkit-transform: translateY(0.1rem);
+      -moz-transform: translateY(0.1rem);
+      -ms-transform: translateY(0.1rem);
+      -o-transform: translateY(0.1rem);
     }
     .show-search-slider .header__search {
       display: none;
@@ -536,14 +547,14 @@
           }
 
           calculatePercentageOfViewportHeight(percentage) {
-            const vh = document.querySelector('body').offsetHeight;
+            const vh = document.body.clientHeight || document.body.offsetHeight || document.body.scrollHeight;
             const pixels = (vh * percentage) / 100;
             return pixels;
           }
 
           scrollHandle() {
             const threshold = this.calculatePercentageOfViewportHeight(this.slidePosition);
-            const scrollPosition = window.scrollY;
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             const isScrollingDown = scrollPosition > this.lastScrollPosition;
 
             if (isScrollingDown && scrollPosition > threshold && !this.scrolledPastThreshold) {
